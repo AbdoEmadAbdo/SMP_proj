@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Search</h1>
+            <form method="get" action="{% url 'search' %}">
+                {{ form.as_p }} 
+                
+                {% comment %}
+                    to render the search form, and displaying the search results as a list of links to the detail page of each result.
+                {% endcomment %}
+                    
+                <button type="submit" class="btn btn-primary">Search</button>
+            </form>
+            <hr>
+            {% if results %}
+                <h2>Results:</h2>
+                <ul>
+                    {% for result in results %}
+                        <li><a href="{% url 'detail' result.pk %}">{{ result.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
